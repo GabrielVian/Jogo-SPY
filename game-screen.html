@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPY - Configuração do Jogo</title>
+<link rel="stylesheet" href="styles.css">
+<script>
+    // Função para atualizar a contagem de jogadores
+    function updatePlayerCount(value) {
+      document.getElementById('player-count').textContent = `JOGADORES: ${value}`;
+    }
+  
+    // Função para iniciar o jogo
+    function startGame() {
+      // Pega a quantidade de jogadores do range picker
+      const playerCount = document.getElementById('range-picker').value;
+  
+      // Redireciona para a nova tela do jogo com a quantidade de jogadores na URL
+      window.location.href = 'new-game-screen.html?players=' + playerCount;
+    }
+  
+    // Evento que é disparado quando o DOM está completamente carregado
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Chama a função updatePlayerCount com o valor inicial do range picker
+      updatePlayerCount(document.getElementById('range-picker').value);
+    });
+  </script>
+</head>
+<body>
+    
+<img src="images/spy.webp" alt="" class="spy-img">
+<div class="game-container-create">
+    <div id="player-count">JOGADORES: 3</div>
+    <input type="range" id="range-picker" min="3" max="15" value="1" oninput="updatePlayerCount(this.value)">
+    <button onclick="startGame()" class="start-button">Iniciar</button>
+</div>
+</body>
+</html>

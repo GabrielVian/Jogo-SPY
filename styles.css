@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family:"Poppins", sans-serif;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    align-items: center;
+    background-color: #f7f7f7;
+}
+
+.game-container {
+    text-align: center;
+    padding: 50px;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    transition: transform 0.2s;
+    scale: 1;
+}
+
+.spy-title {
+    font-size: 15em;
+    margin-bottom: 20px;
+}
+
+.spy-img{
+    display: block; /* Isso é necessário para aplicar margem automática no eixo horizontal */
+    margin: 0 auto 20px; /* Centraliza a imagem e adiciona uma margem inferior de 20px */
+    margin-top: 10px;
+    width: 50%; /* Ou o tamanho que você desejar, mas 50% deve servir para a maioria das larguras de tela */
+    max-width: 100px; /* Opcional: um máximo para a largura da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}  
+
+.play-button {
+    font-size: 5em;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+}
+
+.start-button {
+    font-size: 3em;
+    margin-top: 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    transition: background-color 0.2s;
+    border-radius: 5px;
+}
+
+
+.play-button:hover {
+    background-color: #444;
+}
+
+  
+#player-count {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+}
+/* Responsividade para telas pequenas (celulares) */
+@media (max-width: 600px) {
+    .game-container {
+        width: 95%;
+        padding: 20px;
+    }
+    .spy-title {
+        font-size: 8em;
+    }
+    .play-button {
+        font-size: 3em;
+        padding: 8px 16px;
+    }
+    #player-count {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+}
+.game-container-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#range-picker {
+    scale: 2;
+}
+
+
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .card {
+    width: 100px; /* Ajuste conforme o necessário */
+    height: 150px; /* Ajuste conforme o necessário */
+    margin: 10px;
+    position: relative;
+    background-image: url("images/card.png");
+    background-position: center; /* Centraliza a imagem de fundo na div */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-size: 100% 100%; /* Faz a imagem esticar para preencher a div */
+  }
+  
+  .card.inactive {
+    opacity: 0.4;
+  }
