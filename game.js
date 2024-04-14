@@ -5,6 +5,7 @@ async function getRandomPlace() {
     const places = await response.json();
     return places[Math.floor(Math.random() * places.length)];
 }
+let inactiveCardsCount = 0;
 
 // Função para inicializar as cartas
 async function initializeCards(playerCount) {
@@ -14,6 +15,23 @@ async function initializeCards(playerCount) {
     for (let i = 0; i < playerCount; i++) {
         const card = document.createElement('div');
         card.className = 'card';
+
+        // Cria a frente da carta
+        const front = document.createElement('div');
+        front.className = 'front';
+        // Se você tem uma imagem específica para a frente da carta, defina-a aqui
+        front.style.backgroundImage = "url('images/card.png')"; 
+
+        // Cria o verso da carta
+        const back = document.createElement('div');
+        back.className = 'back';
+        // Define a imagem do verso da carta aqui
+        back.style.backgroundImage = "url('images/card2.png')";
+
+        // Anexa a frente e o verso ao elemento da carta
+        card.appendChild(front);
+        card.appendChild(back);
+
         card.addEventListener('click', () => revealCard(i, playerCount, place));
         cardsContainer.appendChild(card);
     }
@@ -31,26 +49,46 @@ function revealCard(index, playerCount, place) {
         return;
     }
 
-    // Verifica se a carta é a do espião
-    if (card.classList.contains('spy')) {
-        Swal.fire({
-            title: 'Detetive',
-            icon: 'info'
-        });
-    } else {
-        Swal.fire({
-            title: place,
-            icon: 'info'
-        });
-    }
+    card.classList.add('flipped');
+    setTimeout(() => {
+        if (card.classList.contains('spy')) {
+            Swal.fire({
+                title: 'Detetive',
+                icon: 'info'
+            }).then((e) => {
+                handleUserOk(card);
+            });
+        } else {
+            Swal.fire({
+                title: place,
+                icon: 'info'
+            }).then((e) => {
+                handleUserOk(card);
+            });
+        }
+    }, 600); 
+    
+}
+
+function handleUserOk(card){
     // Torna a carta inativa
     card.classList.add('inactive');
+
+    // Dentro da função revealCard
+    // ...
+    // Se todas as cartas estiverem inativas, inicia o timer em uma nova tela
+
+    inactiveCardsCount++;
+    if (inactiveCardsCount === playerCount) {
+        window.location.href = `timer.html?players=${playerCount}`;
+    }
+    // ...
 }
+
 
 // Obtém a quantidade de jogadores da URL
 const queryParams = new URLSearchParams(window.location.search);
-const playerCount = parseInt(queryParams.get('players')) || 4; // Default para 4 jogadores se não for especificado
+const playerCount = parseInt(queryParams.get('players')) || 3; // Default para 3 jogadores se não for especificado
 
 initializeCards(playerCount);
 });
-  

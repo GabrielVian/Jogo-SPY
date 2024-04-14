@@ -73,23 +73,7 @@ body, html {
     margin-bottom: 20px;
 }
 /* Responsividade para telas pequenas (celulares) */
-@media (max-width: 600px) {
-    .game-container {
-        width: 95%;
-        padding: 20px;
-    }
-    .spy-title {
-        font-size: 8em;
-    }
-    .play-button {
-        font-size: 3em;
-        padding: 8px 16px;
-    }
-    #player-count {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-    }
-}
+
 .game-container-create {
     display: flex;
     flex-direction: column;
@@ -106,6 +90,7 @@ body, html {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+    scale: 1;
   }
   
   .card {
@@ -117,8 +102,76 @@ body, html {
     background-position: center; /* Centraliza a imagem de fundo na div */
     background-repeat: no-repeat; /* Impede que a imagem se repita */
     background-size: 100% 100%; /* Faz a imagem esticar para preencher a div */
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+    transition: transform 1s;
+  }
+
+/* Estilo para a parte frontal da carta */
+.card .front {
+    /* ...seus estilos para a parte frontal da carta... */
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center; /* Centraliza a imagem de fundo na div */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-size: 100% 100%; /* Faz a imagem esticar para preencher a div */
+
   }
   
+  /* Estilo para a parte de trás da carta */
+  .card .back {
+    /* ...seus estilos para a parte de trás da carta... */
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/card1.png'); /* Substitua pelo caminho correto da imagem */
+    background-position: center; /* Centraliza a imagem de fundo na div */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    background-size: 100% 100%; /* Faz a imagem esticar para preencher a div */
+  }
+  
+  /* Quando a carta possui a classe .flipped, gire-a 180 graus */
+  .card.flipped {
+    transform: translateX(-100%) rotateY(-180deg);
+  }
+  
+  /* Assegure-se de que cartas inativas não podem ser clicadas novamente */
+  .card.inactive {
+    pointer-events: none;
+  }
+
   .card.inactive {
     opacity: 0.4;
   }
+
+  #timer-display{
+    scale: 2.5;
+  }
+
+  @media (max-width: 600px) {
+    .game-container {
+        width: 95%;
+        padding: 20px;
+    }
+    .spy-title {
+        font-size: 8em;
+    }
+    .play-button {
+        font-size: 3em;
+        padding: 8px 16px;
+    }
+    #player-count {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    #timer-display{
+        scale: 1.5;
+      }
+}
