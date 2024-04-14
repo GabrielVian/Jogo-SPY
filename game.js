@@ -53,7 +53,7 @@ function revealCard(index, playerCount, place) {
     setTimeout(() => {
         if (card.classList.contains('spy')) {
             Swal.fire({
-                title: 'Detetive',
+                title: 'ESPIÃO',
                 icon: 'info'
             }).then((e) => {
                 handleUserOk(card);
